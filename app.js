@@ -25,7 +25,17 @@ const limiter = rateLimit({
 const app = express();
 
 app.use(helmet());
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      'http://localhost:7000',
+      'http://wycktor.nomoredomainsrocks.ru',
+      'https://wycktor.nomoredomainsrocks.ru',
+    ],
+    maxAge: 30,
+    credentials: true,
+  }),
+);
 app.use(limiter);
 app.use(requestLogger);
 
